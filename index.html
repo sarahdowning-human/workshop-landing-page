@@ -166,7 +166,7 @@
     }
 
     async function sendToGoogleSheets(data) {
-      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJj8ctg33as1W4IwiKwdEHOjPRKZEm0QVcF5Brol8_V4v5v_Y1Z9XoWNioCYoSmLz5Ug/exec';
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6yl305DUMgp7N9Ujq3f6CROo8b58duZkLaiZybKHlWeR11rAeQJSJO33AUtgDKdW32Q/exec';
       try {
         // no-cors => respuesta opaca; se asume éxito si no lanza error de red
         await fetch(GOOGLE_SCRIPT_URL, {
@@ -191,7 +191,7 @@
       const EMAILJS_SERVICE_ID = 'service_khe0vlg';
       const EMAILJS_TEMPLATE_ID = 'template_12345';
       const emailData = {
-        to_name: data.nombre,
+        to_name: data.nombre, data.apellido
         to_email: data.email,
         empresa: data.empresa,
         website_url: 'https://ivgrowth.com',
@@ -212,11 +212,12 @@
         const formData = new FormData(form);
         const data = {
           nombre: (formData.get('nombre') || '').trim(),
+          apellido: (formData.get('apellido') || '').trim(),
           email: (formData.get('email') || '').trim(),
           empresa: (formData.get('empresa') || '').trim()
         };
 
-        if (!data.nombre || !data.email || !data.empresa) {
+        if (!data.nombre ||!data.apellido || !data.email || !data.empresa) {
           alert('Por favor, completa todos los campos.');
           return;
         }
